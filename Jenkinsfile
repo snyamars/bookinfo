@@ -28,14 +28,14 @@ node {
     }
     def serverImage = docker.build('snyamars007/mongodb:${env.BUILD_ID}', './src/mongodb/Dockerfile')
     serverImage.push()
-    def serverImage = docker.build('snyamars007/mysql:${env.BUILD_ID}', './src/mysql/Dockerfile')
-    serverImage.push()
-    def serverImage = docker.build('snyamars007/details:${env.BUILD_ID}', './src/details/Dockerfile')
-    serverImage.push()
-    def serverImage = docker.build('snyamars007/productpage:${env.BUILD_ID}', './src/productpage/Dockerfile')
-    serverImage.push()
-    def serverImage = docker.build('snyamars007/ratings:${env.BUILD_ID}', './src/ratings/Dockerfile')
-    serverImage.push()
+    def serverImage1 = docker.build('snyamars007/mysql:${env.BUILD_ID}', './src/mysql/Dockerfile')
+    serverImage1.push()
+    def serverImage2 = docker.build('snyamars007/details:${env.BUILD_ID}', './src/details/Dockerfile')
+    serverImage2.push()
+    def serverImage3 = docker.build('snyamars007/productpage:${env.BUILD_ID}', './src/productpage/Dockerfile')
+    serverImage3.push()
+    def serverImage4 = docker.build('snyamars007/ratings:${env.BUILD_ID}', './src/ratings/Dockerfile')
+    serverImage4.push()
 
     sh 'docker logout'
    }
@@ -43,21 +43,11 @@ node {
   /***/
       stage 'notifyKubernetes'
      try{
-      sh "kubectl delete deployment coe-spring-webpromote"
+      sh "kubectl apply -f ./kube/bookinfo.yaml"
+   
      }catch(e){
       println("no prior deployment exists")
      }
-     try{
-          sh "kubectl delete svc coe-spring-webpromote"   
-     }catch(e){
-      println("no prior service exists")
-     }
-   
-      sh "sleep 3s"
-      sh "kubectl run --image=snyamars007/coe-spring-webpromote:latest coe-spring-webpromote  --port=8091"
-      
-      sh "kubectl expose deployment coe-spring-webpromote"
-     / **/
-    
-      /***/   
+        
+  /***/   
 }//end of node
