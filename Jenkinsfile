@@ -27,9 +27,9 @@ node {
       sh 'docker login --username $DOCKERHUB_USER --password $DOCKERHUB_PASS'
     }
     
-    def serverImage = docker.build("snyamars007/mongodb:${env.BUILD_ID}", '/var/jenkins_home/workspace/bookinfo/src/mongodb/Dockerfile')
+    def serverImage = docker.build("snyamars007/mongodb:${env.BUILD_ID}", '/var/jenkins_home/workspace/bookinfo/src/mongodb')
        serverImage.push()
-    def serverImage1 = docker.build("snyamars007/mysql:${env.BUILD_ID}", '/var/jenkins_home/workspace/bookinfo/src/mysql/Dockerfile')
+    def serverImage1 = docker.build("snyamars007/mysql:${env.BUILD_ID}", '/var/jenkins_home/workspace/bookinfo/src/mysql')
     serverImage1.push()
     def serverImage2 = docker.build("snyamars007/details:${env.BUILD_ID}", '/var/jenkins_home/workspace/bookinfo/src/details/Dockerfile')
     serverImage2.push()
