@@ -26,8 +26,17 @@ node {
       withCredentials([[$class: "UsernamePasswordMultiBinding", usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS', credentialsId: 'dockerhub_id']]) {
       sh 'docker login --username $DOCKERHUB_USER --password $DOCKERHUB_PASS'
     }
-    def serverImage = docker.build('snyamars007/coe-spring-webpromote')
-    serverImage.push('latest')
+    def serverImage = docker.build('snyamars007/mongodb:${env.BUILD_ID}', './src/mongodb/Dockerfile')
+    serverImage.push()
+    def serverImage = docker.build('snyamars007/mysql:${env.BUILD_ID}', './src/mysql/Dockerfile')
+    serverImage.push()
+    def serverImage = docker.build('snyamars007/details:${env.BUILD_ID}', './src/details/Dockerfile')
+    serverImage.push()
+    def serverImage = docker.build('snyamars007/productpage:${env.BUILD_ID}', './src/productpage/Dockerfile')
+    serverImage.push()
+    def serverImage = docker.build('snyamars007/ratings:${env.BUILD_ID}', './src/ratings/Dockerfile')
+    serverImage.push()
+
     sh 'docker logout'
    }
    
