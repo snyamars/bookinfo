@@ -21,6 +21,10 @@ node {
       //  archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
     }
   
+  stage('s2i'){
+    //sh "/var/jenkins_home/s2i build bookinfo/productpage snyamars007/springboot-jdk8"
+  }
+  
     /***/ 
     stage ('docker build'){
       withCredentials([[$class: "UsernamePasswordMultiBinding", usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS', credentialsId: 'dockerhub_id']]) {
