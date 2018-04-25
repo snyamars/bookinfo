@@ -40,7 +40,7 @@ node {
     sh 'docker logout'
    }
    
-  /***/
+  /***
       stage 'notifyKubernetes'
      try{
       sh "kubectl apply -f ./kube/bookinfo.yaml"
@@ -49,5 +49,5 @@ node {
       println("no prior deployment exists")
      }
         
-  /***/   
+  ***/   
 }//end of node
