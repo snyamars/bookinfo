@@ -28,7 +28,7 @@ node {
     }
     
       //def serverImage = docker.build('snyamars007/mongodb:${env.BUILD_ID}', '/var/jenkins_home/workspace/bookinfo/src/mongodb/Dockerfile')
-    def serverImage = docker.build('snyamars007/mongodb:${env.BUILD_ID}')
+    def serverImage = docker.build("snyamars007/mongodb:${env.BUILD_ID}")
     serverImage.push()
     def serverImage1 = docker.build('snyamars007/mysql:${env.BUILD_ID}', '/var/jenkins_home/workspace/bookinfo/src/mysql/Dockerfile')
     serverImage1.push()
