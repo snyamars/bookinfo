@@ -31,11 +31,11 @@ node {
        serverImage.push()
     def serverImage1 = docker.build("snyamars007/mysql:${env.BUILD_ID}", '/var/jenkins_home/workspace/bookinfo/src/mysql')
     serverImage1.push()
-    def serverImage2 = docker.build("snyamars007/details:${env.BUILD_ID}", '/var/jenkins_home/workspace/bookinfo/src/details/Dockerfile')
+    def serverImage2 = docker.build("snyamars007/details:${env.BUILD_ID}", '/var/jenkins_home/workspace/bookinfo/src/details')
     serverImage2.push()
-    def serverImage3 = docker.build("snyamars007/productpage:${env.BUILD_ID}", '/var/jenkins_home/workspace/bookinfo/src/productpage/Dockerfile')
+    def serverImage3 = docker.build("snyamars007/productpage:${env.BUILD_ID}", '/var/jenkins_home/workspace/bookinfo/src/productpage')
     serverImage3.push()
-    def serverImage4 = docker.build("snyamars007/ratings:${env.BUILD_ID}", '/var/jenkins_home/workspace/bookinfo/src/ratings/Dockerfile')
+    def serverImage4 = docker.build("snyamars007/ratings:${env.BUILD_ID}", '/var/jenkins_home/workspace/bookinfo/src/ratings')
     serverImage4.push()
 
     sh 'docker logout'
