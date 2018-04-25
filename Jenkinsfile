@@ -26,15 +26,15 @@ node {
       withCredentials([[$class: "UsernamePasswordMultiBinding", usernameVariable: 'DOCKERHUB_USER', passwordVariable: 'DOCKERHUB_PASS', credentialsId: 'dockerhub_id']]) {
       sh 'docker login --username $DOCKERHUB_USER --password $DOCKERHUB_PASS'
     }
-    def serverImage = docker.build('snyamars007/mongodb:${env.BUILD_ID}', './src/mongodb/Dockerfile')
+    def serverImage = docker.build('snyamars007/mongodb:${env.BUILD_ID}', '/var/jenkins_home/workspace/bookinfo/src/mongodb/Dockerfile')
     serverImage.push()
-    def serverImage1 = docker.build('snyamars007/mysql:${env.BUILD_ID}', './src/mysql/Dockerfile')
+    def serverImage1 = docker.build('snyamars007/mysql:${env.BUILD_ID}', '/var/jenkins_home/workspace/bookinfo/src/mysql/Dockerfile')
     serverImage1.push()
-    def serverImage2 = docker.build('snyamars007/details:${env.BUILD_ID}', './src/details/Dockerfile')
+    def serverImage2 = docker.build('snyamars007/details:${env.BUILD_ID}', '/var/jenkins_home/workspace/bookinfo/src/details/Dockerfile')
     serverImage2.push()
-    def serverImage3 = docker.build('snyamars007/productpage:${env.BUILD_ID}', './src/productpage/Dockerfile')
+    def serverImage3 = docker.build('snyamars007/productpage:${env.BUILD_ID}', '/var/jenkins_home/workspace/bookinfo/src/productpage/Dockerfile')
     serverImage3.push()
-    def serverImage4 = docker.build('snyamars007/ratings:${env.BUILD_ID}', './src/ratings/Dockerfile')
+    def serverImage4 = docker.build('snyamars007/ratings:${env.BUILD_ID}', '/var/jenkins_home/workspace/bookinfo/src/ratings/Dockerfile')
     serverImage4.push()
 
     sh 'docker logout'
